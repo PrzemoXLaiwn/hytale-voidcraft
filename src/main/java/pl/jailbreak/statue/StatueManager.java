@@ -2,8 +2,8 @@ package pl.jailbreak.statue;
 
 import com.hypixel.hytale.component.Ref;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.math.Vector3d;
-import com.hypixel.hytale.math.Vector3f;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 import pl.jailbreak.player.PlayerData;

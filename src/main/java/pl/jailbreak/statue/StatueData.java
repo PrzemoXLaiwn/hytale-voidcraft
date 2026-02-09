@@ -1,7 +1,7 @@
 package pl.jailbreak.statue;
 
-import com.hypixel.hytale.math.Vector3d;
-import com.hypixel.hytale.math.Vector3f;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
 
 import java.util.Objects;
 

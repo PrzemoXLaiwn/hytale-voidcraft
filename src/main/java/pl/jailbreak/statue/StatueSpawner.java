@@ -1,11 +1,12 @@
 package pl.jailbreak.statue;
 
 import com.hypixel.hytale.component.Ref;
+import com.hypixel.hytale.component.RemoveReason;
 import com.hypixel.hytale.component.Store;
-import com.hypixel.hytale.data.Pair;
+import it.unimi.dsi.fastutil.Pair;
 import com.hypixel.hytale.server.core.universe.world.World;
 import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
-import com.hypixel.hytale.server.npc.INonPlayerCharacter;
+import com.hypixel.hytale.server.core.universe.world.npc.INonPlayerCharacter;
 import com.hypixel.hytale.server.npc.NPCPlugin;
 
 import java.util.Map;
@@ -112,7 +113,7 @@ public class StatueSpawner {
             try {
                 // Usuń entity ze store
                 // Uwaga: Może wymagać world.execute() w kontekście świata
-                store.removeEntity(ref);
+                store.removeEntity(ref, RemoveReason.REMOVE);
 
                 System.out.println("[StatueSpawner] Despawned statue #" + rank);
             } catch (Exception e) {

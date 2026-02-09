@@ -2,8 +2,8 @@ package pl.jailbreak.statue;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.hypixel.hytale.math.Vector3d;
-import com.hypixel.hytale.math.Vector3f;
+import com.hypixel.hytale.math.vector.Vector3d;
+import com.hypixel.hytale.math.vector.Vector3f;
 
 import java.io.*;
 import java.util.*;
