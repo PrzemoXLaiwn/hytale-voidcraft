@@ -1,4 +1,137 @@
 package pl.jailbreak.listeners;
 
+import com.hypixel.hytale.event.EventRegistry;
+import com.hypixel.hytale.server.core.Message;
+import com.hypixel.hytale.server.core.entity.entities.Player;
+import com.hypixel.hytale.server.core.event.events.player.PlayerConnectEvent;
+import com.hypixel.hytale.server.core.event.events.player.PlayerDisconnectEvent;
+import com.hypixel.hytale.server.core.universe.PlayerRef;
+import pl.jailbreak.player.PlayerData;
+import pl.jailbreak.player.PlayerManager;
+import pl.jailbreak.util.StarterKit;
+import pl.jailbreak.JailbreakPlugin;
+import pl.jailbreak.hud.ScoreboardManager;
+import pl.jailbreak.mine.MineRegenTask;
+import pl.jailbreak.achievements.AchievementCheckTask;
+
 public class PlayerListener {
+
+    private final PlayerManager playerManager;
+
+    public PlayerListener(PlayerManager playerManager) {
+        this.playerManager = playerManager;
+        System.out.println("[Voidcraft] PlayerListener created!");
+    }
+
+    public void register(EventRegistry eventRegistry) {
+        eventRegistry.register(PlayerConnectEvent.class, this::onPlayerConnect);
+        eventRegistry.register(PlayerDisconnectEvent.class, this::onPlayerDisconnect);
+        System.out.println("[Voidcraft] Events registered!");
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onPlayerConnect(PlayerConnectEvent event) {
+        Player player = event.getPlayer();
+        String uuid = player.getUuid().toString();
+
+        String name;
+        try {
+            name = player.getDisplayName();
+            if (name == null || name.isEmpty()) {
+                name = uuid.substring(0, 8);
+            }
+        } catch (Exception e) {
+            name = uuid.substring(0, 8);
+        }
+
+        PlayerData data = playerManager.loadOrCreate(uuid, name);
+
+        if (data != null && !name.equals(data.getName())) {
+            data.setName(name);
+            System.out.println("[Voidcraft] Updated player name: " + name);
+        }
+
+        if (data != null) {
+            sendWelcomeMessage(player, name);
+
+            if (data.isFirstJoin()) {
+                StarterKit.giveStarterKit(player);
+                data.setFirstJoin(false);
+                playerManager.savePlayer(uuid);
+            }
+        }
+
+        try {
+            if (player.getWorld() != null) {
+                MineRegenTask regenTask = JailbreakPlugin.getMineRegenTask();
+                if (regenTask != null) {
+                    regenTask.setWorld(player.getWorld());
+                }
+
+                AchievementCheckTask achievementTask = JailbreakPlugin.getAchievementCheckTask();
+                if (achievementTask != null) {
+                    achievementTask.setWorld(player.getWorld());
+                }
+
+                System.out.println("[Voidcraft] World set for background tasks");
+            }
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] Error setting world: " + e.getMessage());
+        }
+
+        // Set up Scoreboard HUD
+        try {
+            ScoreboardManager scoreboardManager = JailbreakPlugin.getScoreboardManager();
+            if (scoreboardManager != null && data != null) {
+                scoreboardManager.setupHud(player, data);
+            }
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] HUD setup error: " + e.getMessage());
+        }
+    }
+
+    @SuppressWarnings("deprecation")
+    private void onPlayerDisconnect(PlayerDisconnectEvent event) {
+        PlayerRef ref = event.getPlayerRef();
+        String uuid = ref.getUuid().toString();
+        playerManager.savePlayer(uuid);
+
+        // Remove HUD
+        try {
+            ScoreboardManager scoreboardManager = JailbreakPlugin.getScoreboardManager();
+            if (scoreboardManager != null) {
+                scoreboardManager.removeHud(ref.getUuid());
+            }
+        } catch (Exception e) {
+            // Silently ignore
+        }
+    }
+
+    private void sendWelcomeMessage(Player player, String playerName) {
+        player.sendMessage(Message.raw(" "));
+        player.sendMessage(Message.raw("========================================").color("#9400D3"));
+        player.sendMessage(Message.raw("       WELCOME TO VOIDCRAFT").color("#9400D3").bold(true));
+        player.sendMessage(Message.raw("========================================").color("#9400D3"));
+        player.sendMessage(Message.raw(" "));
+        player.sendMessage(Message.raw("  Hello, " + playerName + "!").color("#FFFFFF"));
+        player.sendMessage(Message.raw(" "));
+        player.sendMessage(Message.raw("  Commands:").color("#FFD700"));
+        player.sendMessage(Message.raw("    /bal - Check balance").color("#AAAAAA"));
+        player.sendMessage(Message.raw("    /sell - Sell ores").color("#AAAAAA"));
+        player.sendMessage(Message.raw("    /shop - Open shop").color("#AAAAAA"));
+        player.sendMessage(Message.raw("    /warp - Teleport menu").color("#AAAAAA"));
+        player.sendMessage(Message.raw("    /daily - Daily reward").color("#AAAAAA"));
+        player.sendMessage(Message.raw(" "));
+        player.sendMessage(Message.raw("  Have fun mining!").color("#00FF00"));
+        player.sendMessage(Message.raw("========================================").color("#9400D3"));
+        player.sendMessage(Message.raw(" "));
+        
+        // Vote reminder
+        player.sendMessage(Message.raw("Heads Up! You have not voted today! Use /vote for rewards!").color("#FF6600"));
+        player.sendMessage(Message.raw(" "));
+        player.sendMessage(Message.raw("------------------ Our Vote Link ------------------").color("#FFD700"));
+        player.sendMessage(Message.raw("Vote at: hyghest.com/server/voidcraft").color("#00BFFF"));
+        player.sendMessage(Message.raw("Reward: $500 per vote!").color("#00FF00"));
+        player.sendMessage(Message.raw("------------------ Our Vote Link ------------------").color("#FFD700"));
+    }
 }

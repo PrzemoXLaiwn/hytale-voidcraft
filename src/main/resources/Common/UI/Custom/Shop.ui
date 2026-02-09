@@ -1,0 +1,197 @@
+Group {
+    LayoutMode: Center;
+
+    Group #ShopContainer {
+        Anchor: (Width: 700, Height: 550);
+        LayoutMode: Left;
+        Padding: (Full: 8);
+        Background: (Color: #0a0a15(0.95));
+
+        Group #LeftPanel {
+            Anchor: (Width: 320, Height: 530);
+            LayoutMode: Top;
+            Padding: (Full: 8);
+            Background: (Color: #0d0d1a(0.9));
+
+            Label #ShopTitle {
+                Style: (FontSize: 22, Alignment: Center, TextColor: #FFD700);
+                Text: "PICKAXE SHOP";
+                Anchor: (Height: 32);
+            }
+
+            Group #Divider1 {
+                Anchor: (Height: 2);
+                Background: (Color: #FFD700);
+            }
+
+            Group #ItemsList {
+                LayoutMode: Top;
+                Anchor: (Height: 480);
+                Padding: (Top: 4);
+
+                Button #Item1 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #2a4a25(0.85));
+                    Label { Text: "1. Wood Pickaxe - FREE"; Style: (FontSize: 13, Alignment: Center, TextColor: #FFFFFF); }
+                }
+
+                Button #Item2 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #4a3a2a(0.85));
+                    Label { Text: "2. Crude Pickaxe - $500"; Style: (FontSize: 13, Alignment: Center, TextColor: #FFFFFF); }
+                }
+
+                Button #Item3 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #7a5030(0.85));
+                    Label { Text: "3. Copper Pickaxe - $2,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #CD7F32); }
+                }
+
+                Button #Item4 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #3a3a4a(0.85));
+                    Label { Text: "4. Iron Pickaxe - $8,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #C0C0C0); }
+                }
+
+                Button #Item5 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #4a3050(0.85));
+                    Label { Text: "5. Scrap Pickaxe - $25,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #9966CC); }
+                }
+
+                Button #Item6 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #204050(0.85));
+                    Label { Text: "6. Thorium Pickaxe - $60,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #20B2AA); }
+                }
+
+                Button #Item7 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #303060(0.85));
+                    Label { Text: "7. Mithril Pickaxe - $150,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #6495ED); }
+                }
+
+                Button #Item8 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #0040a0(0.85));
+                    Label { Text: "8. Cobalt Pickaxe - $400,000"; Style: (FontSize: 13, Alignment: Center, TextColor: #4169E1); }
+                }
+
+                Button #Item9 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #501030(0.85));
+                    Label { Text: "9. Adamantite Pickaxe - $1M"; Style: (FontSize: 13, Alignment: Center, TextColor: #FF1493); }
+                }
+
+                Button #Item10 {
+                    Anchor: (Height: 44);
+                    Background: (Color: #101010(0.9));
+                    Label { Text: "10. Onyxium Pickaxe - $2.5M"; Style: (FontSize: 13, Alignment: Center, TextColor: #FF4500); }
+                }
+            }
+        }
+
+        Group #RightPanel {
+            Anchor: (Width: 360, Height: 530);
+            LayoutMode: Top;
+            Padding: (Full: 12);
+            Background: (Color: #12122a(0.9));
+
+            Label #InfoTitle {
+                Style: (FontSize: 20, Alignment: Center, TextColor: #FFD700);
+                Text: "ITEM INFO";
+                Anchor: (Height: 30);
+            }
+
+            Group #Divider2 {
+                Anchor: (Height: 2);
+                Background: (Color: #FFD700);
+            }
+
+            Group #PlayerInfo {
+                Anchor: (Height: 60);
+                LayoutMode: Top;
+                Padding: (Full: 8);
+                Background: (Color: #1a1a35(0.8));
+
+                Label #BalanceLabel {
+                    Style: (FontSize: 16, TextColor: #00FF00);
+                    Text: "Balance: $0";
+                    Anchor: (Height: 24);
+                }
+
+                Label #SectorLabel {
+                    Style: (FontSize: 14, TextColor: #00BFFF);
+                    Text: "Sector: A";
+                    Anchor: (Height: 22);
+                }
+            }
+
+            Group #SelectedItemBox {
+                Anchor: (Height: 320);
+                LayoutMode: Top;
+                Padding: (Full: 12);
+                Background: (Color: #1a1a40(0.85));
+
+                Label #SelectedName {
+                    Style: (FontSize: 18, Alignment: Center, TextColor: #FFFFFF);
+                    Text: "Select a pickaxe";
+                    Anchor: (Height: 28);
+                }
+
+                Group #Divider3 {
+                    Anchor: (Height: 1);
+                    Background: (Color: #444466);
+                }
+
+                Label #SelectedPrice {
+                    Style: (FontSize: 16, TextColor: #FFD700);
+                    Text: "Price: -";
+                    Anchor: (Height: 26);
+                }
+
+                Label #SelectedDurability {
+                    Style: (FontSize: 14, TextColor: #00BFFF);
+                    Text: "Durability: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #SelectedSpeed {
+                    Style: (FontSize: 14, TextColor: #90EE90);
+                    Text: "Mining Speed: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #SelectedRarity {
+                    Style: (FontSize: 14, TextColor: #DDA0DD);
+                    Text: "Rarity: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #SelectedSector {
+                    Style: (FontSize: 14, TextColor: #FFA500);
+                    Text: "Required Sector: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #SelectedStatus {
+                    Style: (FontSize: 14, Alignment: Center, TextColor: #888888);
+                    Text: "";
+                    Anchor: (Height: 26);
+                }
+            }
+
+            Button #BuyButton {
+                Anchor: (Height: 50);
+                Background: (Color: #006400(0.9));
+                Label { Text: "BUY SELECTED ITEM"; Style: (FontSize: 18, Alignment: Center, TextColor: #FFFFFF); }
+            }
+
+            Button #CloseButton {
+                Anchor: (Height: 40);
+                Background: (Color: #8B0000(0.9));
+                Label { Text: "CLOSE"; Style: (FontSize: 16, Alignment: Center, TextColor: #FFFFFF); }
+            }
+        }
+    }
+}

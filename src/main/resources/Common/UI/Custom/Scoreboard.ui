@@ -1,0 +1,63 @@
+Group {
+    LayoutMode: Top;
+    Padding: (Top: 10);
+
+    Group #ScoreboardPanel {
+        Anchor: (Width: 200, Height: 185);
+        LayoutMode: Top;
+        Padding: (Full: 10);
+        Background: (Color: #0a0a18(0.85));
+
+        Label #HudTitle {
+            Style: (FontSize: 16, Alignment: Center, TextColor: #9400D3);
+            Text: "VOIDCRAFT";
+            Anchor: (Height: 22);
+        }
+
+        Group #HudDivider {
+            Anchor: (Height: 2);
+            Background: (Color: #9400D3(0.6));
+        }
+
+        Label #HudBalance {
+            Style: (FontSize: 13, TextColor: #00FF00);
+            Text: "Balance: $0";
+            Anchor: (Height: 20);
+        }
+
+        Label #HudSector {
+            Style: (FontSize: 13, TextColor: #00BFFF);
+            Text: "Sector: A";
+            Anchor: (Height: 20);
+        }
+
+        Label #HudPrestige {
+            Style: (FontSize: 13, TextColor: #FF00FF);
+            Text: "Prestige: 0";
+            Anchor: (Height: 20);
+        }
+
+        Label #HudPickaxe {
+            Style: (FontSize: 13, TextColor: #FFD700);
+            Text: "Pickaxe: Wood";
+            Anchor: (Height: 20);
+        }
+
+        Label #HudBlocksMined {
+            Style: (FontSize: 13, TextColor: #AAAAAA);
+            Text: "Blocks: 0";
+            Anchor: (Height: 20);
+        }
+
+        Group #HudDivider2 {
+            Anchor: (Height: 1);
+            Background: (Color: #333355(0.5));
+        }
+
+        Label #HudEnchants {
+            Style: (FontSize: 11, TextColor: #9966CC);
+            Text: "Enchants: None";
+            Anchor: (Height: 18);
+        }
+    }
+}

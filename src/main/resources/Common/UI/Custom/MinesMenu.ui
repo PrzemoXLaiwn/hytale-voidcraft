@@ -1,0 +1,105 @@
+Group {
+    LayoutMode: Center;
+
+    Group #MinesContainer {
+        Anchor: (Width: 400, Height: 580);
+        LayoutMode: Top;
+        Padding: (Full: 15);
+        Background: (Color: #0d0d1a(0.97));
+
+        Label #MinesTitle {
+            Style: (FontSize: 24, Alignment: Center, TextColor: #FFD700);
+            Text: "MINES";
+            Anchor: (Height: 35);
+        }
+
+        Label #MinesSubtitle {
+            Style: (FontSize: 12, Alignment: Center, TextColor: #888888);
+            Text: "Select a sector to teleport";
+            Anchor: (Height: 22);
+        }
+
+        Group #Divider1 {
+            Anchor: (Height: 3);
+            Background: (Color: #FFD700(0.6));
+        }
+
+        Group #MinesList {
+            LayoutMode: Top;
+            Anchor: (Height: 420);
+            Padding: (Top: 8);
+
+            Button #MineA {
+                Anchor: (Height: 38);
+                Background: (Color: #1a4a1a(0.95));
+                Label { Text: "SECTOR A - Copper (FREE)"; Style: (FontSize: 15, Alignment: Center, TextColor: #00FF00); }
+            }
+
+            Button #MineB {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a2a(0.95));
+                Label { Text: "SECTOR B - Iron"; Style: (FontSize: 15, Alignment: Center, TextColor: #CD7F32); }
+            }
+
+            Button #MineC {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a2a(0.95));
+                Label { Text: "SECTOR C - Thorium"; Style: (FontSize: 15, Alignment: Center, TextColor: #CD7F32); }
+            }
+
+            Button #MineD {
+                Anchor: (Height: 38);
+                Background: (Color: #3a3a4a(0.95));
+                Label { Text: "SECTOR D - Silver"; Style: (FontSize: 15, Alignment: Center, TextColor: #C0C0C0); }
+            }
+
+            Button #MineE {
+                Anchor: (Height: 38);
+                Background: (Color: #3a3a4a(0.95));
+                Label { Text: "SECTOR E - Gold"; Style: (FontSize: 15, Alignment: Center, TextColor: #FFD700); }
+            }
+
+            Button #MineF {
+                Anchor: (Height: 38);
+                Background: (Color: #2a3050(0.95));
+                Label { Text: "SECTOR F - Cobalt"; Style: (FontSize: 15, Alignment: Center, TextColor: #6495ED); }
+            }
+
+            Button #MineG {
+                Anchor: (Height: 38);
+                Background: (Color: #2a3050(0.95));
+                Label { Text: "SECTOR G - Adamantite"; Style: (FontSize: 15, Alignment: Center, TextColor: #6495ED); }
+            }
+
+            Button #MineH {
+                Anchor: (Height: 38);
+                Background: (Color: #3a2050(0.95));
+                Label { Text: "SECTOR H - Adamantite+"; Style: (FontSize: 15, Alignment: Center, TextColor: #DDA0DD); }
+            }
+
+            Button #MineI {
+                Anchor: (Height: 38);
+                Background: (Color: #3a2050(0.95));
+                Label { Text: "SECTOR I - Adamantite++"; Style: (FontSize: 15, Alignment: Center, TextColor: #DDA0DD); }
+            }
+
+            Button #MineJ {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a1a(0.95));
+                Label { Text: "SECTOR J - Adamantite (LEGENDARY)"; Style: (FontSize: 14, Alignment: Center, TextColor: #FFD700); }
+            }
+        }
+
+        Label #InfoText {
+            Style: (FontSize: 11, Alignment: Center, TextColor: #55FF55);
+            Text: "Green = Owned | Gray = Locked";
+            Anchor: (Height: 20);
+        }
+
+        Button #BackButton {
+            Anchor: (Height: 50);
+            Background: (Color: #4a2a4a(0.95));
+            Label { Text: "BACK"; Style: (FontSize: 18, Alignment: Center, TextColor: #9400D3); }
+        }
+    }
+}

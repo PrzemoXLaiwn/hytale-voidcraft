@@ -148,7 +148,7 @@ TemplatePlugin/
 
 **Note:** This is a minimal template. Create your own folder structure:
 
-- `commands/` - For command implementations
+- `pl.jailbreak.commands/` - For command implementations
 - `listeners/` - For event listeners
 - `services/` - For business logic
 - `storage/` - For data persistence
@@ -254,7 +254,7 @@ gradlew.bat runServer
 ```
 src/main/java/com/yourname/yourplugin/
 ├── YourPlugin.java          # Main class
-├── commands/                # Commands
+├── pl.jailbreak.commands/                # Commands
 ├── listeners/               # Event listeners
 ├── services/                # Business logic
 ├── storage/                 # Data persistence

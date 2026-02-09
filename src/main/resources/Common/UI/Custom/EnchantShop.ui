@@ -1,0 +1,173 @@
+Group {
+    LayoutMode: Center;
+
+    Group #EnchantContainer {
+        Anchor: (Width: 750, Height: 500);
+        LayoutMode: Left;
+        Padding: (Full: 8);
+        Background: (Color: #0a0a18(0.95));
+
+        Group #LeftPanel {
+            Anchor: (Width: 380, Height: 480);
+            LayoutMode: Top;
+            Padding: (Full: 10);
+            Background: (Color: #10102a(0.9));
+
+            Label #ShopTitle {
+                Style: (FontSize: 22, Alignment: Center, TextColor: #9966CC);
+                Text: "ENCHANTMENT SHOP";
+                Anchor: (Height: 32);
+            }
+
+            Group #Divider1 {
+                Anchor: (Height: 2);
+                Background: (Color: #9966CC);
+            }
+
+            Group #EnchantList {
+                LayoutMode: Top;
+                Anchor: (Height: 420);
+                Padding: (Top: 6);
+
+                Button #Enchant1 {
+                    Anchor: (Height: 70);
+                    Background: (Color: #3d3d00(0.85));
+                    Label { Text: "FORTUNE - +10% sell value/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FFD700); }
+                }
+
+                Button #Enchant2 {
+                    Anchor: (Height: 70);
+                    Background: (Color: #52003d(0.85));
+                    Label { Text: "LUCK - 5% x2 money chance/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FF69B4); }
+                }
+
+                Button #Enchant3 {
+                    Anchor: (Height: 70);
+                    Background: (Color: #003d3d(0.85));
+                    Label { Text: "EFFICIENCY - Mine extra blocks"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FFFF); }
+                }
+
+                Button #Enchant4 {
+                    Anchor: (Height: 70);
+                    Background: (Color: #2d0052(0.85));
+                    Label { Text: "MULTI-DROP - 5% bonus ore/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #9966CC); }
+                }
+
+                Button #Enchant5 {
+                    Anchor: (Height: 70);
+                    Background: (Color: #003d00(0.85));
+                    Label { Text: "AUTO-SELL - Instant sell on mine"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FF00); }
+                }
+            }
+        }
+
+        Group #RightPanel {
+            Anchor: (Width: 350, Height: 480);
+            LayoutMode: Top;
+            Padding: (Full: 12);
+            Background: (Color: #15152a(0.9));
+
+            Label #InfoTitle {
+                Style: (FontSize: 18, Alignment: Center, TextColor: #9966CC);
+                Text: "ENCHANT INFO";
+                Anchor: (Height: 28);
+            }
+
+            Group #Divider2 {
+                Anchor: (Height: 2);
+                Background: (Color: #9966CC);
+            }
+
+            Group #PlayerInfo {
+                Anchor: (Height: 50);
+                LayoutMode: Top;
+                Padding: (Full: 6);
+                Background: (Color: #1a1a40(0.8));
+
+                Label #BalanceLabel {
+                    Style: (FontSize: 15, TextColor: #00FF00);
+                    Text: "Balance: $0";
+                    Anchor: (Height: 22);
+                }
+
+                Label #SectorLabel {
+                    Style: (FontSize: 13, TextColor: #00BFFF);
+                    Text: "Sector: A";
+                    Anchor: (Height: 20);
+                }
+            }
+
+            Group #EnchantInfoBox {
+                Anchor: (Height: 280);
+                LayoutMode: Top;
+                Padding: (Full: 10);
+                Background: (Color: #1a1a45(0.85));
+
+                Label #EnchantName {
+                    Style: (FontSize: 18, Alignment: Center, TextColor: #FFFFFF);
+                    Text: "Select an enchant";
+                    Anchor: (Height: 26);
+                }
+
+                Group #Divider3 {
+                    Anchor: (Height: 1);
+                    Background: (Color: #444466);
+                }
+
+                Label #EnchantDesc {
+                    Style: (FontSize: 13, TextColor: #AAAAAA);
+                    Text: "Click an enchant to see details";
+                    Anchor: (Height: 24);
+                }
+
+                Label #CurrentLevel {
+                    Style: (FontSize: 14, TextColor: #00BFFF);
+                    Text: "Current Level: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #MaxLevel {
+                    Style: (FontSize: 13, TextColor: #888888);
+                    Text: "Max Level: -";
+                    Anchor: (Height: 22);
+                }
+
+                Label #NextLevelPrice {
+                    Style: (FontSize: 14, TextColor: #FFD700);
+                    Text: "Upgrade Cost: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #RequiredSector {
+                    Style: (FontSize: 13, TextColor: #FFA500);
+                    Text: "Required Sector: -";
+                    Anchor: (Height: 22);
+                }
+
+                Label #EffectInfo {
+                    Style: (FontSize: 13, TextColor: #90EE90);
+                    Text: "Effect: -";
+                    Anchor: (Height: 24);
+                }
+
+                Label #StatusLabel {
+                    Style: (FontSize: 14, Alignment: Center, TextColor: #888888);
+                    Text: "";
+                    Anchor: (Height: 26);
+                }
+            }
+
+            Button #UpgradeButton {
+                Anchor: (Height: 50);
+                Background: (Color: #4B0082(0.9));
+                Label { Text: "UPGRADE ENCHANT"; Style: (FontSize: 16, Alignment: Center, TextColor: #FFFFFF); }
+            }
+
+            Button #CloseButton {
+                Anchor: (Height: 38);
+                Background: (Color: #8B0000(0.9));
+                Label { Text: "CLOSE"; Style: (FontSize: 14, Alignment: Center, TextColor: #FFFFFF); }
+            }
+        }
+    }
+}

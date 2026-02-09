@@ -1,0 +1,101 @@
+Group {
+    LayoutMode: Center;
+
+    Group #CrateContainer {
+        Anchor: (Width: 650, Height: 420);
+        LayoutMode: Top;
+        Padding: (Full: 8);
+        Background: (Color: #0a0a18(0.95));
+
+        Label #CrateTitle {
+            Style: (FontSize: 24, Alignment: Center, TextColor: #FFD700);
+            Text: "OPENING CRATE...";
+            Anchor: (Height: 36);
+        }
+
+        Group #DividerTop {
+            Anchor: (Height: 2);
+            Background: (Color: #FFD700);
+        }
+
+        Group #KeyInfo {
+            Anchor: (Height: 30);
+            LayoutMode: Top;
+            Padding: (Full: 4);
+
+            Label #KeysLeft {
+                Style: (FontSize: 13, Alignment: Center, TextColor: #AAAAAA);
+                Text: "Keys remaining: 0";
+                Anchor: (Height: 24);
+            }
+        }
+
+        Group #RollingArea {
+            Anchor: (Height: 220);
+            LayoutMode: Top;
+            Padding: (Full: 6);
+            Background: (Color: #12122a(0.9));
+
+            Label #Slot1 {
+                Anchor: (Height: 38);
+                Style: (FontSize: 16, Alignment: Center, TextColor: #444444);
+                Text: "---";
+            }
+
+            Label #Slot2 {
+                Anchor: (Height: 38);
+                Style: (FontSize: 16, Alignment: Center, TextColor: #555555);
+                Text: "---";
+            }
+
+            Label #Slot3 {
+                Anchor: (Height: 42);
+                Style: (FontSize: 20, Alignment: Center, TextColor: #FFFFFF);
+                Text: ">>> CLICK OPEN <<<";
+            }
+
+            Label #Slot4 {
+                Anchor: (Height: 38);
+                Style: (FontSize: 16, Alignment: Center, TextColor: #555555);
+                Text: "---";
+            }
+
+            Label #Slot5 {
+                Anchor: (Height: 38);
+                Style: (FontSize: 16, Alignment: Center, TextColor: #444444);
+                Text: "---";
+            }
+        }
+
+        Group #ResultArea {
+            Anchor: (Height: 50);
+            LayoutMode: Top;
+            Padding: (Full: 4);
+            Background: (Color: #1a1a40(0.85));
+
+            Label #ResultLabel {
+                Style: (FontSize: 18, Alignment: Center, TextColor: #888888);
+                Text: "";
+                Anchor: (Height: 40);
+            }
+        }
+
+        Group #ButtonArea {
+            Anchor: (Height: 55);
+            LayoutMode: Left;
+            Padding: (Full: 4);
+
+            Button #OpenButton {
+                Anchor: (Width: 310, Height: 48);
+                Background: (Color: #006400(0.9));
+                Label #OpenLabel { Text: "OPEN CRATE"; Style: (FontSize: 18, Alignment: Center, TextColor: #FFFFFF); }
+            }
+
+            Button #CloseButton {
+                Anchor: (Width: 310, Height: 48);
+                Background: (Color: #8B0000(0.9));
+                Label #CloseLabel { Text: "CLOSE"; Style: (FontSize: 18, Alignment: Center, TextColor: #FFFFFF); }
+            }
+        }
+    }
+}

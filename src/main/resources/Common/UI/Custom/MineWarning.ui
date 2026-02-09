@@ -1,0 +1,55 @@
+Group {
+    LayoutMode: Top;
+    Padding: (Top: 30);
+
+    Group #WarningWrapper {
+        LayoutMode: Center;
+        Anchor: (Width: 500, Height: 120);
+
+        Group #WarningContainer {
+            Anchor: (Width: 500, Height: 120);
+            LayoutMode: Top;
+            Background: (Color: #1a0000(0.95));
+            Padding: (Full: 8);
+
+            Group #TopBorder {
+                Anchor: (Height: 3);
+                Background: (Color: #FF0000);
+            }
+
+            Group #ContentBox {
+                LayoutMode: Top;
+                Padding: (Top: 8, Left: 15, Right: 15);
+
+                Label #WarningTitle {
+                    Style: (FontSize: 20, Alignment: Center, TextColor: #FF4444);
+                    Text: "WARNING - MINE REGENERATION";
+                    Anchor: (Height: 28);
+                }
+
+                Label #WarningText {
+                    Style: (FontSize: 14, Alignment: Center, TextColor: #FFFFFF);
+                    Text: "Mine is regenerating in 15 seconds!";
+                    Anchor: (Height: 22);
+                }
+
+                Label #MineNameText {
+                    Style: (FontSize: 16, Alignment: Center, TextColor: #FFD700);
+                    Text: "MINE: test";
+                    Anchor: (Height: 24);
+                }
+
+                Label #CountdownText {
+                    Style: (FontSize: 18, Alignment: Center, TextColor: #FF0000);
+                    Text: "LEAVE NOW! 15s";
+                    Anchor: (Height: 26);
+                }
+            }
+
+            Group #BottomBorder {
+                Anchor: (Height: 3);
+                Background: (Color: #FF0000);
+            }
+        }
+    }
+}

@@ -114,7 +114,7 @@ tasks.register('generateVSCodeLaunch') {
         }
         def programParams = createServerRunArguments("\${workspaceFolder}")
         def launchConfig = [
-            version: "0.2.0",
+            version: "0.3.0",
             configurations: [
                 [
                     type: "java",

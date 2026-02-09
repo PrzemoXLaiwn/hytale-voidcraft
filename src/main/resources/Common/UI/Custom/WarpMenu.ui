@@ -1,0 +1,139 @@
+Group {
+    LayoutMode: Center;
+
+    Group #WarpContainer {
+        Anchor: (Width: 420, Height: 620);
+        LayoutMode: Top;
+        Padding: (Full: 15);
+        Background: (Color: #0a0a15(0.97));
+
+        Label #PageTitle {
+            Style: (FontSize: 28, Alignment: Center, TextColor: #9400D3);
+            Text: "VOIDCRAFT";
+            Anchor: (Height: 36);
+        }
+
+        Label #PageSubtitle {
+            Style: (FontSize: 12, Alignment: Center, TextColor: #666688);
+            Text: "Teleport Menu";
+            Anchor: (Height: 20);
+        }
+
+        Group #DividerTop {
+            Anchor: (Height: 3);
+            Background: (Color: #9400D3(0.8));
+        }
+
+        Group #MainMenu {
+            LayoutMode: Top;
+            Anchor: (Height: 460);
+            Padding: (Top: 30);
+
+            Button #SpawnButton {
+                Anchor: (Height: 70);
+                Background: (Color: #1a3a1a(0.95));
+                Label { Text: "SPAWN"; Style: (FontSize: 22, Alignment: Center, TextColor: #00FF88); }
+            }
+
+            Group #SpacerMain {
+                Anchor: (Height: 15);
+            }
+
+            Button #MinesButton {
+                Anchor: (Height: 70);
+                Background: (Color: #3a3a1a(0.95));
+                Label { Text: "MINES"; Style: (FontSize: 22, Alignment: Center, TextColor: #FFD700); }
+            }
+        }
+
+        Group #MinesPanel {
+            LayoutMode: Top;
+            Anchor: (Height: 460);
+            Visible: false;
+            Padding: (Top: 5);
+
+            Button #MineA {
+                Anchor: (Height: 38);
+                Background: (Color: #1a4a1a(0.95));
+                Label { Text: "SECTOR A - Stone, Copper (FREE)"; Style: (FontSize: 13, Alignment: Center, TextColor: #00FF00); }
+            }
+
+            Button #MineB {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a2a(0.90));
+                Label { Text: "SECTOR B - Iron, Copper"; Style: (FontSize: 13, Alignment: Center, TextColor: #CD7F32); }
+            }
+
+            Button #MineC {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a2a(0.90));
+                Label { Text: "SECTOR C - Thorium, Iron"; Style: (FontSize: 13, Alignment: Center, TextColor: #CD7F32); }
+            }
+
+            Button #MineD {
+                Anchor: (Height: 38);
+                Background: (Color: #3a3a4a(0.90));
+                Label { Text: "SECTOR D - Gold, Silver"; Style: (FontSize: 13, Alignment: Center, TextColor: #C0C0C0); }
+            }
+
+            Button #MineE {
+                Anchor: (Height: 38);
+                Background: (Color: #3a3a4a(0.90));
+                Label { Text: "SECTOR E - Cobalt"; Style: (FontSize: 13, Alignment: Center, TextColor: #C0C0C0); }
+            }
+
+            Button #MineF {
+                Anchor: (Height: 38);
+                Background: (Color: #2a3050(0.90));
+                Label { Text: "SECTOR F - Adamantite"; Style: (FontSize: 13, Alignment: Center, TextColor: #6495ED); }
+            }
+
+            Button #MineG {
+                Anchor: (Height: 38);
+                Background: (Color: #2a3050(0.90));
+                Label { Text: "SECTOR G - Diamond, Ruby"; Style: (FontSize: 13, Alignment: Center, TextColor: #6495ED); }
+            }
+
+            Button #MineH {
+                Anchor: (Height: 38);
+                Background: (Color: #3a2050(0.90));
+                Label { Text: "SECTOR H - Emerald, Sapphire"; Style: (FontSize: 13, Alignment: Center, TextColor: #DDA0DD); }
+            }
+
+            Button #MineI {
+                Anchor: (Height: 38);
+                Background: (Color: #3a2050(0.90));
+                Label { Text: "SECTOR I - Topaz, All Gems"; Style: (FontSize: 13, Alignment: Center, TextColor: #DDA0DD); }
+            }
+
+            Button #MineJ {
+                Anchor: (Height: 38);
+                Background: (Color: #4a3a1a(0.90));
+                Label { Text: "SECTOR J - All Ores (LEGENDARY)"; Style: (FontSize: 13, Alignment: Center, TextColor: #FFD700); }
+            }
+
+            Label #InfoText {
+                Style: (FontSize: 11, Alignment: Center, TextColor: #55FF55);
+                Text: "Green = Owned | Gray = Locked";
+                Anchor: (Height: 22);
+            }
+
+            Button #BackButton {
+                Anchor: (Height: 45);
+                Background: (Color: #2a1a3a(0.95));
+                Label { Text: "BACK"; Style: (FontSize: 16, Alignment: Center, TextColor: #9400D3); }
+            }
+        }
+
+        Group #DividerBottom {
+            Anchor: (Height: 3);
+            Background: (Color: #FFD700(0.4));
+        }
+
+        Button #CloseButton {
+            Anchor: (Height: 45);
+            Background: (Color: #4a1a1a(0.95));
+            Label { Text: "CLOSE"; Style: (FontSize: 16, Alignment: Center, TextColor: #FF6666); }
+        }
+    }
+}
