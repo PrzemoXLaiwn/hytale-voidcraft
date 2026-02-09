@@ -27,22 +27,56 @@ public class PickaxeEnchantUtil {
     /**
      * Get the pickaxe the player is currently holding.
      * Uses getItemInHand() which handles both hotbar and tools container.
-     * Falls back to getActiveToolItem() in case pickaxe is in tools slot.
+     * Falls back to scanning all tools slots to find any pickaxe.
      * Returns null if not holding a pickaxe.
      */
     public static ItemStack getHeldPickaxe(Player player) {
         try {
             Inventory inv = player.getInventory();
             if (inv == null) return null;
-            // getItemInHand() auto-handles hotbar vs tools based on usingToolsItem()
-            ItemStack held = inv.getItemInHand();
-            if (held != null && isPickaxe(held)) return held;
-            // Fallback: check active tool item directly
-            held = inv.getActiveToolItem();
-            if (held != null && isPickaxe(held)) return held;
-            // Fallback: check hotbar
-            held = inv.getActiveHotbarItem();
-            if (held != null && isPickaxe(held)) return held;
+
+            // Primary: getItemInHand() auto-handles hotbar vs tools
+            try {
+                ItemStack held = inv.getItemInHand();
+                if (held != null && isPickaxe(held)) return held;
+            } catch (Exception ignored) {}
+
+            // Fallback 1: check active tool item directly
+            try {
+                ItemStack held = inv.getActiveToolItem();
+                if (held != null && isPickaxe(held)) return held;
+            } catch (Exception ignored) {}
+
+            // Fallback 2: check active hotbar item
+            try {
+                ItemStack held = inv.getActiveHotbarItem();
+                if (held != null && isPickaxe(held)) return held;
+            } catch (Exception ignored) {}
+
+            // Fallback 3: scan ALL tools slots for any pickaxe
+            try {
+                ItemContainer tools = inv.getTools();
+                if (tools != null) {
+                    short capacity = tools.getCapacity();
+                    for (short slot = 0; slot < capacity; slot++) {
+                        ItemStack item = tools.getItemStack(slot);
+                        if (item != null && isPickaxe(item)) return item;
+                    }
+                }
+            } catch (Exception ignored) {}
+
+            // Fallback 4: scan hotbar for any pickaxe
+            try {
+                ItemContainer hotbar = inv.getHotbar();
+                if (hotbar != null) {
+                    short capacity = hotbar.getCapacity();
+                    for (short slot = 0; slot < capacity; slot++) {
+                        ItemStack item = hotbar.getItemStack(slot);
+                        if (item != null && isPickaxe(item)) return item;
+                    }
+                }
+            } catch (Exception ignored) {}
+
         } catch (Exception e) {
             System.out.println("[Voidcraft] Error getting held pickaxe: " + e.getMessage());
         }

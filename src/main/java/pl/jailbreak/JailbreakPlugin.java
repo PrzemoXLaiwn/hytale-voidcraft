@@ -424,6 +424,7 @@ public class JailbreakPlugin extends JavaPlugin {
         }
 
         // HUD refresh timer - updates every 5 seconds
+        // Inventory access (pickaxe detection) must run on game thread via world.execute()
         hudRefreshTimer = new Timer("Voidcraft-HudRefresh", true);
         hudRefreshTimer.scheduleAtFixedRate(new TimerTask() {
             @Override
@@ -434,9 +435,25 @@ public class JailbreakPlugin extends JavaPlugin {
                         java.util.UUID uuid = entry.getKey();
                         pl.jailbreak.player.PlayerData data = playerManager.getPlayer(uuid.toString());
                         if (data != null) {
-                            // Get stored Player reference so pickaxe info can be read
                             com.hypixel.hytale.server.core.entity.entities.Player player = scoreboardManager.getPlayer(uuid);
-                            entry.getValue().refresh(player, data);
+                            if (player != null) {
+                                // Run on game thread so inventory access works
+                                var world = player.getWorld();
+                                if (world != null) {
+                                    final pl.jailbreak.player.PlayerData finalData = data;
+                                    final pl.jailbreak.hud.ScoreboardHud hud = entry.getValue();
+                                    world.execute(() -> {
+                                        try {
+                                            hud.refresh(player, finalData);
+                                        } catch (Exception ignored) {}
+                                    });
+                                } else {
+                                    // No world, refresh without pickaxe info
+                                    entry.getValue().refresh(null, data);
+                                }
+                            } else {
+                                entry.getValue().refresh(null, data);
+                            }
                         }
                     }
                 } catch (Exception e) {
