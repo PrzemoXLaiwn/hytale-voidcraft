@@ -13,10 +13,15 @@ import pl.jailbreak.JailbreakPlugin;
 import pl.jailbreak.hud.ScoreboardManager;
 import pl.jailbreak.mine.MineRegenTask;
 import pl.jailbreak.achievements.AchievementCheckTask;
+import pl.jailbreak.statue.StatueManager;
+import com.hypixel.hytale.component.Store;
+import com.hypixel.hytale.server.core.universe.world.World;
+import com.hypixel.hytale.server.core.universe.world.storage.EntityStore;
 
 public class PlayerListener {
 
     private final PlayerManager playerManager;
+    private static boolean statuesInitialized = false;
 
     public PlayerListener(PlayerManager playerManager) {
         this.playerManager = playerManager;
@@ -87,6 +92,26 @@ public class PlayerListener {
             }
         } catch (Exception e) {
             System.out.println("[Voidcraft] HUD setup error: " + e.getMessage());
+        }
+
+        // Initialize statue system on first player join (one-time)
+        if (!statuesInitialized) {
+            try {
+                StatueManager statueManager = JailbreakPlugin.getStatueManager();
+                if (statueManager != null && player.getWorld() != null) {
+                    World world = player.getWorld();
+                    Store<EntityStore> store = world.getEntityStore().getStore();
+
+                    System.out.println("[Voidcraft] First player joined - initializing StatueManager...");
+                    statueManager.init(JailbreakPlugin.getDataFolder(), world, store);
+
+                    statuesInitialized = true;
+                    System.out.println("[Voidcraft] StatueManager initialized successfully!");
+                }
+            } catch (Exception e) {
+                System.out.println("[Voidcraft] StatueManager initialization error: " + e.getMessage());
+                e.printStackTrace();
+            }
         }
     }
 

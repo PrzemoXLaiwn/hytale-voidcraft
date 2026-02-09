@@ -79,6 +79,8 @@ import pl.jailbreak.hud.ScoreboardManager;
 import pl.jailbreak.commands.admin.CrateAddCommand;
 import pl.jailbreak.commands.admin.CrateDeleteCommand;
 import pl.jailbreak.commands.admin.CrateListCommand;
+import pl.jailbreak.statue.StatueManager;
+import pl.jailbreak.commands.StatueCommand;
 
 import javax.annotation.Nonnull;
 import java.io.File;
@@ -110,6 +112,7 @@ public class JailbreakPlugin extends JavaPlugin {
     private CrateLocationManager crateLocationManager;
     private ScoreboardManager scoreboardManager;
     private Timer hudRefreshTimer;
+    private StatueManager statueManager;
 
     public JailbreakPlugin(@Nonnull JavaPluginInit init) {
         super(init);
@@ -270,6 +273,15 @@ public class JailbreakPlugin extends JavaPlugin {
             e.printStackTrace();
         }
 
+        // Statue system - create manager but don't initialize yet (needs World)
+        try {
+            statueManager = new StatueManager(playerManager);
+            System.out.println("[Voidcraft] StatueManager created! Will initialize on first player join.");
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] StatueManager ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+
         // Help command
         getCommandRegistry().registerCommand(new HelpCommand());
 
@@ -296,6 +308,7 @@ public class JailbreakPlugin extends JavaPlugin {
         getCommandRegistry().registerCommand(new ProtectAddCommand());
         getCommandRegistry().registerCommand(new ProtectDeleteCommand());
         getCommandRegistry().registerCommand(new ProtectListCommand());
+        getCommandRegistry().registerCommand(new StatueCommand());
 
         // Shop commands
         try {
@@ -436,6 +449,7 @@ public class JailbreakPlugin extends JavaPlugin {
         if (achievementTimer != null) achievementTimer.cancel();
         if (eventTimer != null) eventTimer.cancel();
         if (hudRefreshTimer != null) hudRefreshTimer.cancel();
+        if (statueManager != null) statueManager.shutdown();
         if (playerManager != null) playerManager.saveAllPlayers();
         if (mineManager != null) mineManager.save();
         if (database != null) database.disconnect();
@@ -454,5 +468,6 @@ public class JailbreakPlugin extends JavaPlugin {
     public static WarpManager getWarpManager() { return instance.warpManager; }
     public static CrateLocationManager getCrateLocationManager() { return instance.crateLocationManager; }
     public static ScoreboardManager getScoreboardManager() { return instance.scoreboardManager; }
+    public static StatueManager getStatueManager() { return instance.statueManager; }
     public static File getDataFolder() { return instance.dataFolder; }
 }
