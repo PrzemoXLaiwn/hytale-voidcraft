@@ -62,9 +62,23 @@ public class EnchantShopPage extends InteractiveCustomUIPage<EnchantShopPage.Enc
             uiCommandBuilder.set("#SectorLabel.TextSpans", Message.raw("Sector: " + data.getCurrentSector()));
         }
 
-        // Register enchant buttons
+        // Read enchants from held pickaxe and display initial state
+        ItemStack heldPickaxe = (player != null) ? PickaxeEnchantUtil.getHeldPickaxe(player) : null;
+        PlayerEnchants enchants = PickaxeEnchantUtil.readEnchants(heldPickaxe);
+        String pickaxeName = (heldPickaxe != null) ? PickaxeEnchantUtil.getPickaxeTierName(heldPickaxe) : "None";
+        uiCommandBuilder.set("#PickaxeLabel.TextSpans", Message.raw("Pickaxe: " + pickaxeName).color("#FFD700"));
+
+        System.out.println("[EnchantShopPage] Held pickaxe: " + (heldPickaxe != null ? heldPickaxe.getItemId() : "null") + ", tier: " + pickaxeName);
+
+        // Register enchant buttons and set labels with current levels
         EnchantType[] types = EnchantType.values();
         for (int i = 0; i < types.length && i < 6; i++) {
+            EnchantType t = types[i];
+            int level = enchants.getLevel(t);
+            String levelText = level > 0 ? " [Lvl " + level + "]" : "";
+            uiCommandBuilder.set("#Enchant" + (i + 1) + "Label.TextSpans",
+                Message.raw(t.displayName + levelText + " - " + t.description).color(t.color));
+
             uiEventBuilder.addEventBinding(
                 CustomUIEventBindingType.Activating,
                 "#Enchant" + (i + 1),
@@ -131,8 +145,10 @@ public class EnchantShopPage extends InteractiveCustomUIPage<EnchantShopPage.Enc
 
         // Read enchants from held pickaxe
         ItemStack heldPickaxe = (player != null) ? PickaxeEnchantUtil.getHeldPickaxe(player) : null;
+        System.out.println("[EnchantShopPage] selectEnchant: player=" + (player != null) + ", pickaxe=" + (heldPickaxe != null ? heldPickaxe.getItemId() : "null"));
         PlayerEnchants enchants = PickaxeEnchantUtil.readEnchants(heldPickaxe);
         int currentLevel = enchants.getLevel(type);
+        System.out.println("[EnchantShopPage] " + type.name() + " level=" + currentLevel);
         int nextLevel = currentLevel + 1;
         boolean isMaxed = currentLevel >= type.maxLevel;
 

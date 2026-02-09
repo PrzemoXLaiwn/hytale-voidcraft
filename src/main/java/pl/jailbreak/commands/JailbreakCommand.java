@@ -30,9 +30,17 @@ public abstract class JailbreakCommand extends AbstractCommand {
 
     public JailbreakCommand(String name, String desc) {
         super(name, desc);
-        // Make all player commands accessible to everyone (Default group = all players)
-        // Admin commands override this by calling requirePermission() in their constructor
-        setPermissionGroups("Default");
+    }
+
+    /**
+     * Disable auto-generated permission nodes for player commands.
+     * When permission is null, hasPermission() returns true for everyone.
+     * Admin commands that call requirePermission() will still be protected
+     * because requirePermission() explicitly sets the permission string.
+     */
+    @Override
+    protected boolean canGeneratePermission() {
+        return false;
     }
 
     protected CompletableFuture<Void> completed() {
