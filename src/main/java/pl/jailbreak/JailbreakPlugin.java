@@ -110,6 +110,8 @@ public class JailbreakPlugin extends JavaPlugin {
     private CrateLocationManager crateLocationManager;
     private ScoreboardManager scoreboardManager;
     private Timer hudRefreshTimer;
+    private pl.jailbreak.systems.SpawnProtectionHealTask spawnProtectionHealTask;
+    private Timer spawnProtectionTimer;
 
     public JailbreakPlugin(@Nonnull JavaPluginInit init) {
         super(init);
@@ -258,6 +260,15 @@ public class JailbreakPlugin extends JavaPlugin {
             System.out.println("[Voidcraft] ItemPickupProtectionSystem registered!");
         } catch (Exception e) {
             System.out.println("[Voidcraft] ItemPickupProtectionSystem ERROR: " + e.getMessage());
+            e.printStackTrace();
+        }
+
+        // Register Block Use Protection System (blocks F/Use interactions in protected zones)
+        try {
+            getEntityStoreRegistry().registerSystem(new pl.jailbreak.systems.BlockUseProtectionSystem());
+            System.out.println("[Voidcraft] BlockUseProtectionSystem registered!");
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] BlockUseProtectionSystem ERROR: " + e.getMessage());
             e.printStackTrace();
         }
 
@@ -410,9 +421,9 @@ public class JailbreakPlugin extends JavaPlugin {
                         java.util.UUID uuid = entry.getKey();
                         pl.jailbreak.player.PlayerData data = playerManager.getPlayer(uuid.toString());
                         if (data != null) {
-                            // We pass null for player since we can't get Player from UUID in a timer
-                            // The HUD will show last known pickaxe info
-                            entry.getValue().refresh(null, data);
+                            // Get stored Player reference so pickaxe info can be read
+                            com.hypixel.hytale.server.core.entity.entities.Player player = scoreboardManager.getPlayer(uuid);
+                            entry.getValue().refresh(player, data);
                         }
                     }
                 } catch (Exception e) {
@@ -420,6 +431,16 @@ public class JailbreakPlugin extends JavaPlugin {
                 }
             }
         }, 5000, 5000);
+
+        // Spawn protection invulnerability timer - checks every 1 second
+        try {
+            spawnProtectionHealTask = new pl.jailbreak.systems.SpawnProtectionHealTask();
+            spawnProtectionTimer = new Timer("Voidcraft-SpawnProtect", true);
+            spawnProtectionTimer.scheduleAtFixedRate(spawnProtectionHealTask, 2000, 1000);
+            System.out.println("[Voidcraft] SpawnProtectionHealTask started!");
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] SpawnProtectionHealTask ERROR: " + e.getMessage());
+        }
 
         System.out.println("[Voidcraft] Setup complete! All commands should be registered.");
     }
@@ -436,6 +457,7 @@ public class JailbreakPlugin extends JavaPlugin {
         if (achievementTimer != null) achievementTimer.cancel();
         if (eventTimer != null) eventTimer.cancel();
         if (hudRefreshTimer != null) hudRefreshTimer.cancel();
+        if (spawnProtectionTimer != null) spawnProtectionTimer.cancel();
         if (playerManager != null) playerManager.saveAllPlayers();
         if (mineManager != null) mineManager.save();
         if (database != null) database.disconnect();
@@ -454,5 +476,6 @@ public class JailbreakPlugin extends JavaPlugin {
     public static WarpManager getWarpManager() { return instance.warpManager; }
     public static CrateLocationManager getCrateLocationManager() { return instance.crateLocationManager; }
     public static ScoreboardManager getScoreboardManager() { return instance.scoreboardManager; }
+    public static pl.jailbreak.systems.SpawnProtectionHealTask getSpawnProtectionHealTask() { return instance.spawnProtectionHealTask; }
     public static File getDataFolder() { return instance.dataFolder; }
 }

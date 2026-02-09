@@ -46,9 +46,24 @@ public class SellCommand extends JailbreakCommand {
             Map<String, Integer> blockedItems = new HashMap<>();
             long totalValue = 0;
 
-            // Scan hotbar and storage
+            // Debug: log all items in inventory to find correct IDs
+            debugInventoryContents(inventory);
+
+            // Scan all inventory containers (hotbar, storage, tools, utility, backpack)
             totalValue += scanAndSell(inventory.getHotbar(), soldItems, blockedItems, playerSector);
             totalValue += scanAndSell(inventory.getStorage(), soldItems, blockedItems, playerSector);
+            try {
+                if (inventory.getTools() != null)
+                    totalValue += scanAndSell(inventory.getTools(), soldItems, blockedItems, playerSector);
+            } catch (Exception ignored) {}
+            try {
+                if (inventory.getUtility() != null)
+                    totalValue += scanAndSell(inventory.getUtility(), soldItems, blockedItems, playerSector);
+            } catch (Exception ignored) {}
+            try {
+                if (inventory.getBackpack() != null)
+                    totalValue += scanAndSell(inventory.getBackpack(), soldItems, blockedItems, playerSector);
+            } catch (Exception ignored) {}
 
             // Show blocked items first
             if (!blockedItems.isEmpty()) {
@@ -157,5 +172,31 @@ public class SellCommand extends JailbreakCommand {
             }
         }
         return value;
+    }
+
+    private void debugInventoryContents(Inventory inventory) {
+        try {
+            debugContainer("Hotbar", inventory.getHotbar());
+            debugContainer("Storage", inventory.getStorage());
+            try { debugContainer("Tools", inventory.getTools()); } catch (Exception ignored) {}
+            try { debugContainer("Utility", inventory.getUtility()); } catch (Exception ignored) {}
+            try { debugContainer("Backpack", inventory.getBackpack()); } catch (Exception ignored) {}
+        } catch (Exception e) {
+            System.out.println("[Voidcraft] Debug inventory error: " + e.getMessage());
+        }
+    }
+
+    private void debugContainer(String name, ItemContainer container) {
+        if (container == null) return;
+        short capacity = container.getCapacity();
+        for (short slot = 0; slot < capacity; slot++) {
+            ItemStack stack = container.getItemStack(slot);
+            if (stack != null && stack.isValid()) {
+                String itemId = stack.getItemId();
+                int qty = stack.getQuantity();
+                int price = EconomyConfig.getOrePrice(itemId);
+                System.out.println("[Voidcraft] SELL DEBUG " + name + "[" + slot + "]: " + itemId + " x" + qty + " price=" + price);
+            }
+        }
     }
 }

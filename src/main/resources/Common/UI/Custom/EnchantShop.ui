@@ -32,31 +32,31 @@ Group {
                 Button #Enchant1 {
                     Anchor: (Height: 70);
                     Background: (Color: #3d3d00(0.85));
-                    Label { Text: "FORTUNE - +10% sell value/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FFD700); }
+                    Label #Enchant1Label { Text: "FORTUNE - +10% sell value/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FFD700); }
                 }
 
                 Button #Enchant2 {
                     Anchor: (Height: 70);
                     Background: (Color: #52003d(0.85));
-                    Label { Text: "LUCK - 5% x2 money chance/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FF69B4); }
+                    Label #Enchant2Label { Text: "LUCK - 5% x2 money chance/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #FF69B4); }
                 }
 
                 Button #Enchant3 {
                     Anchor: (Height: 70);
                     Background: (Color: #003d3d(0.85));
-                    Label { Text: "EFFICIENCY - Mine extra blocks"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FFFF); }
+                    Label #Enchant3Label { Text: "EFFICIENCY - Mine extra blocks"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FFFF); }
                 }
 
                 Button #Enchant4 {
                     Anchor: (Height: 70);
                     Background: (Color: #2d0052(0.85));
-                    Label { Text: "MULTI-DROP - 5% bonus ore/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #9966CC); }
+                    Label #Enchant4Label { Text: "MULTI-DROP - 5% bonus ore/lvl"; Style: (FontSize: 14, Alignment: Center, TextColor: #9966CC); }
                 }
 
                 Button #Enchant5 {
                     Anchor: (Height: 70);
                     Background: (Color: #003d00(0.85));
-                    Label { Text: "AUTO-SELL - Instant sell on mine"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FF00); }
+                    Label #Enchant5Label { Text: "AUTO-SELL - Instant sell on mine"; Style: (FontSize: 14, Alignment: Center, TextColor: #00FF00); }
                 }
             }
         }
@@ -93,6 +93,12 @@ Group {
                 Label #SectorLabel {
                     Style: (FontSize: 13, TextColor: #00BFFF);
                     Text: "Sector: A";
+                    Anchor: (Height: 20);
+                }
+
+                Label #PickaxeLabel {
+                    Style: (FontSize: 13, TextColor: #FFD700);
+                    Text: "Pickaxe: None";
                     Anchor: (Height: 20);
                 }
             }

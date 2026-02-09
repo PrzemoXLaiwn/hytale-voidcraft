@@ -17,6 +17,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ScoreboardManager {
 
     private final Map<UUID, ScoreboardHud> huds = new ConcurrentHashMap<>();
+    private final Map<UUID, Player> playerRefs = new ConcurrentHashMap<>();
     private final PlayerManager playerManager;
 
     public ScoreboardManager(PlayerManager playerManager) {
@@ -34,6 +35,7 @@ public class ScoreboardManager {
 
             ScoreboardHud hud = new ScoreboardHud(playerRef);
             huds.put(uuid, hud);
+            playerRefs.put(uuid, player);
 
             HudManager hudManager = player.getHudManager();
             hudManager.setCustomHud(playerRef, hud);
@@ -54,6 +56,7 @@ public class ScoreboardManager {
      */
     public void removeHud(UUID uuid) {
         huds.remove(uuid);
+        playerRefs.remove(uuid);
     }
 
     /**
@@ -77,5 +80,12 @@ public class ScoreboardManager {
      */
     public Map<UUID, ScoreboardHud> getHuds() {
         return huds;
+    }
+
+    /**
+     * Get stored Player reference by UUID (for timer-based refresh).
+     */
+    public Player getPlayer(UUID uuid) {
+        return playerRefs.get(uuid);
     }
 }
